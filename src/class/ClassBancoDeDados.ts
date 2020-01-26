@@ -10,6 +10,7 @@ export default class ClassBancoDeDados {
         this.nomeTabela = nomeTabela;
         //this.campos = campos;
 
+        /*
         this.campos = [
             {
                 id: "codigo",
@@ -72,7 +73,7 @@ export default class ClassBancoDeDados {
                 validacoes: []
             }
         ]
-
+        */
 
     }
 

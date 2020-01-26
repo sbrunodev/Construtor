@@ -69,18 +69,21 @@
                   <input type="text" placeholder="ID" v-model="campos[index].id" />
                 </th>
 
-                   <td>
+                <td>
                   <div class="row margin-0 padding-0">
-                    <select class="form-control" v-model="campos[index].tipo"                     
-                    v-bind:class="{'tamanhoCampo-33':( campos[index].tipo == 'classe' )}">
-                    <option value="bool">Bool</option>
-                    <option value="classe">Classe</option>
-                    <option value="datetime">DateTime</option>
-                    <option value="decimal">Decimal</option>
-                    <option value="float">Float</option>
-                    <option value="int">Int</option>
-                    <option value="string">String</option>
-                  </select>
+                    <select
+                      class="form-control"
+                      v-model="campos[index].tipo"
+                      v-bind:class="{'tamanhoCampo-33':( campos[index].tipo == 'classe' )}"
+                    >
+                      <option value="bool">Bool</option>
+                      <option value="classe">Classe</option>
+                      <option value="datetime">DateTime</option>
+                      <option value="decimal">Decimal</option>
+                      <option value="float">Float</option>
+                      <option value="int">Int</option>
+                      <option value="string">String</option>
+                    </select>
 
                     <input
                       class="float-right tamanhoCampo-33"
@@ -90,16 +93,13 @@
                       v-model="campos[index].tipoNomeClasse"
                     />
 
-                     <input
+                    <input
                       class="float-right tamanhoCampo-33"
                       type="text"
                       placeholder="Identificador"
                       v-if="campos[index].tipo == 'classe'"
                       v-model="campos[index].classeIdentificador"
                     />
-
-                    
-                   
                   </div>
                 </td>
 
@@ -140,12 +140,14 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import ModalRegras from "@/components/ModalRegras.vue";
 import ClassFrontEnd from "@/class/ClassFrontEnd.ts";
 import ClassBackEnd from "../class/ClassBackEnd";
+import ClassBackEndCSharpOdbc from "../class/ClassBackEndCSharpOdbc";
+import ClassBackEndNode from "../class/ClassBackEndNode";
 
 @Component({
   components: { ModalRegras }
 })
 export default class CreateBackEnd extends Vue {
-  //campos = [];
+  
   campo = {};
   showModal = false;
   id = "";
@@ -171,22 +173,12 @@ export default class CreateBackEnd extends Vue {
     };
 
     this.campos.push(campo);
-    /*    
-    let campos = [
-      { id: "codigo", tipo: "int" },
-      { id: "nome", tipo: "string" },
-      { id: "sobrenome", tipo: "string" },
-      { id: "datadenascimento", tipo: "datetime" },
-      { id: "status", tipo: "bool" },
-      { id: "cidade", tipo: "string" }
-    ];
-    */
-    //this.nomeClasse = "Cliente";
-    //this.campos = campos;
+
   }
 
   criarClasseAtravesDoBanco() {
-    let obj = new ClassBackEnd("", []);
+    //let obj = new ClassBackEnd("", []);
+    let obj = new ClassBackEndNode("", []);
     obj.BancoParaClasse(this.camposObjBanco);
     this.campos = obj.campos;
   }

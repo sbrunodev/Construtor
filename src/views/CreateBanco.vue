@@ -199,7 +199,7 @@ export default class CreateBanco extends Vue {
   adicionarCampo(situacao: string) {
     let primaryKey = false;
     if (situacao == "primeiroCampo") this.primaryKeySelecionada = 0;
-    console.log(this.primaryKeySelecionada);
+  
     let campo = {
       id: "",
       pk: primaryKey,

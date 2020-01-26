@@ -53,6 +53,20 @@
     <hr />
 
     <div v-if="exibir=='inicio'">
+      <div style="padding-top:5px;padding-bottom:10px;">
+        O intuito dessa tela é te ajudar na criação de código fonte, tanto para suas tabela no banco de dados,
+        classe para seu objeto e sua tela de front-end.
+        Vamos pensar em um cadastro básico para uma Categoria (
+        <i>Titulo</i>) de Produtos.
+        Precisaremos então, de uma tabela no banco
+        <b>tbCategoria</b> (
+        <i>Banco de dados - Tabela</i>),
+        uma classe
+        <b>Categoria</b>(Back-End - Classe) e uma view
+        <b>viewCategoria</b>(
+        <i>Front-End - HTML e JS</i>).
+      </div>
+
       <div class="row" v-if="objGrupo.id == 0 || config">
         <div class="form-group col-4">
           <label>Titulo</label>
@@ -132,7 +146,7 @@
           v-if="objClasse.classe!=''"
           class="btn btn-sm btn-primary float-right btnTamanho margin-l15"
           @click="download('backend')"
-        >download .cs</button>
+        >download .{{objClasse.tipoBackEndDownload}}</button>
 
         <button
           class="btn btn-sm btn-success float-right btnTamanho"
@@ -140,7 +154,7 @@
         >{{ objClasse.classe==''?'Começar':'Visualizar' }}</button>
 
         <div class="form-group" v-if="objClasse.classe!=''">
-          <textarea class="form-control" v-model="objClasse.classe" rows="10"></textarea>
+          <textarea class="form-control" v-model="objClasse.classe" rows="60"></textarea>
         </div>
       </div>
 
@@ -228,7 +242,7 @@ export default class Construir extends Vue {
   objBanco = this.objGrupo.objBanco;
   objClasse = this.objGrupo.objClasse;
   objFrontEnd = this.objGrupo.objFrontEnd;
-  titulo: string = this.objGrupo.titulo;
+  titulo: string = "Unidade"; //this.objGrupo.titulo;
   descricao: string = this.objGrupo.descricao;
 
   config = false;
@@ -250,7 +264,7 @@ export default class Construir extends Vue {
     switch (tipo) {
       case "backend":
         this.initDownload(
-          this.objClasse.nomeClasse + ".cs",
+          this.objClasse.nomeClasse + "." + this.objClasse.tipoBackEndDownload,
           this.objClasse.classe
         );
         break;
@@ -315,6 +329,8 @@ export default class Construir extends Vue {
 
       case "backend":
         {
+          console.log("Carrega Campos - BackEnd");
+          console.log(this.objClasse);
           this.objClasse.campos = params.campos;
           this.objClasse.CreateClasse();
         }
